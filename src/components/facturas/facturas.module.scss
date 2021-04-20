@@ -1,0 +1,48 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 3px 3px 7px 1px #80808096;
+    margin: 10%;
+    margin-top: 20%;
+    background-color: white;
+
+    .containerTitle{
+        display: grid;
+        grid-template-columns: 10% 90%;
+        background-color: red;
+        border-radius: 2% 0;
+        border-radius: 2% 2% 0 0;
+        i{
+            font-size: 1.5rem;
+            align-self: center;
+            text-align: center;
+            &:hover{
+                color:white
+            }
+        }
+        h4{
+            align-self: center;
+            text-align-last: center;
+            padding: 2%;
+            color: white;
+        }
+    }
+    table{
+        thead{
+            tr{
+                text-align-last: center;
+            }
+        }
+        tbody{
+            tr{
+                text-align: -webkit-center;
+                td{
+                    border: none;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
+    
