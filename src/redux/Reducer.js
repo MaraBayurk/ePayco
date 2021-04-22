@@ -1,4 +1,4 @@
-import { TOKEN, PROJECTCONFIG, ALLBILLS, CLEARALLBILLS, ONEBILL, CLEARBILL, LOADING_TRUE, LOADING_FALSE } from './Constants'
+import { TOKEN, PROJECT_CONFIG, ALL_BILLS, CLEAR_ALL_BILLS, ONE_BILL, CLEAR_BILL, LOADING_TRUE, LOADING_FALSE } from './Constants'
 
 const initialState = {
   token: "",
@@ -16,46 +16,46 @@ export default (state = initialState, action) => {
         token: action.payload
       }
 
-    case PROJECTCONFIG:
+    case PROJECT_CONFIG:
       return {
         ...state,
         projectConfig: action.payload
       }
 
-    case ALLBILLS:
+    case ALL_BILLS:
       return {
         ...state,
         bills: action.payload
       }
 
-    case CLEARALLBILLS:
+    case CLEAR_ALL_BILLS:
       return {
         ...state,
         bills: []
       }
 
-    case CLEARBILL:
+    case CLEAR_BILL:
       return {
         ...state,
         bill: []
       }
 
-    case ONEBILL:
+    case ONE_BILL:
       return {
         ...state,
         bill: action.payload
       }
 
     case LOADING_TRUE:
-      return{
+      return {
         ...state,
-        loading:true
+        loading: true
       }
-      case LOADING_FALSE:
-        return{
-          ...state,
-          loading:false
-        }
+    case LOADING_FALSE:
+      return {
+        ...state,
+        loading: false
+      }
 
     default:
       return state;
