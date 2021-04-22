@@ -27,10 +27,10 @@ export default function Facturas() {
     return (
         <div className={`${styles.container} change `}>
             <div className={styles.containerTitle}>
-                <i class="fas fa-arrow-left" onClick={() => goBackPage()}></i>
+                <i className="fas fa-arrow-left" onClick={() => goBackPage()}></i>
                 <h4>Lista de Facturas</h4>
             </div>
-            <table class="table table-hover">
+            <table className="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">Valor</th>
@@ -47,10 +47,10 @@ export default function Facturas() {
                             <td>{factura.billDate.slice(0, 10)}</td>
                             <td>
                                 <button
-                                    class={"btn btn-lg btn-outline-info " + styles.buttonFile}
+                                    className={"btn btn-lg btn-outline-info " + styles.buttonFile}
                                     onClick={() => onChangeClick([factura], factura.document)}>
                                     <div>Detalle</div>
-                                    <i class="fas fa-file-invoice-dollar"></i>
+                                    <i className="fas fa-file-invoice-dollar"></i>
                                 </button>
                             </td>
                         </tr>
