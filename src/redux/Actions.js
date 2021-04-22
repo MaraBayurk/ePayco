@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TOKEN, PROJECTCONFIG, ALLBILLS, CLEARALLBILLS, ONEBILL, CLEARBILL} from './Constants';
+import { TOKEN, PROJECTCONFIG, ALLBILLS, CLEARALLBILLS, ONEBILL, CLEARBILL, LOADING_TRUE, LOADING_FALSE} from './Constants';
 
 export const getToken = () => async (dispatch) => {
     try {
@@ -47,7 +47,9 @@ export const projectConfig = () => async (dispatch, getState) => {
 
 
 export const allBills= (input) => async (dispatch, getState) => {
+
     try {
+        dispatch(loadingTrue())
         let token =  getState().red.token;
         let res= await axios.post("https://apify.epayco.co/billcollect/invoices/consult",
             {
@@ -67,7 +69,7 @@ export const allBills= (input) => async (dispatch, getState) => {
             type: ALLBILLS,
             payload: res.data.data.bills
         });
-
+        dispatch(loadingFalse())
         } catch (error) {
                 console.log("error en getBills", error)
             }
@@ -108,5 +110,28 @@ export const clearBill= () => async (dispatch) => {
 
         } catch (error) {
                 console.log("error en CLEARBILL", error)
+            }
+}
+
+export const loadingTrue= () => async (dispatch) => {
+    try {
+        dispatch({
+            type: LOADING_TRUE,
+            payload: []
+        });
+
+        } catch (error) {
+                console.log("error en LOADING_TRUE", error)
+            }
+}
+export const loadingFalse= () => async (dispatch) => {
+    try {
+        dispatch({
+            type: LOADING_FALSE,
+            payload: []
+        });
+
+        } catch (error) {
+                console.log("error en LOADING_FALSE", error)
             }
 }

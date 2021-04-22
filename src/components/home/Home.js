@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import styles from './home.module.scss';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ export default function Home(){
     let bills = useSelector((store) => store.red.bills);
     let bill = useSelector((store) => store.red.bill);
     let config = useSelector((store) => store.red.projectConfig);
-
+    let loading = useSelector((store) => store.red.loading);
     const[ state, setState]= useState(true)
     const[ estado, setEstado]= useState({
         input:""
@@ -32,26 +32,39 @@ export default function Home(){
         await dispatch( projectConfig()) 
     },[])
 
+    let [count,setCount]=useState(0)
+
 
     useEffect(()=>{
-        if(bills.length>0 || bill.length == 1){
+        if(count!==0){
             if(bill.length == 1){
                 history.push("/factura/"+ bill[0].document)
            } else if (bills.length > 1) {
                 history.push("/facturas")
            } else{
+               console.log("SEABRE:::")
                setModal(true)
            }
         }
+        setCount(count+1)
     },[bills, bill])
+
+    useLayoutEffect(()=>{
+        console.log(loading)
+    },[loading])
 
   
     return (
+        <>
     <div className={`${styles.container} change `} >
         <div class="text-center vsc-initialized" className={styles.containerForm} > 
             <main class="form-signin">
                 <form onSubmit={(e)=> e.preventDefault()}>
-                    <img class="mb-4 text-center" src="https://multimedia-epayco.s3.amazonaws.com/dashboard/recaudo/logos/28770_proyecto_29_1563401775.png" alt="" width="57" height="57"/>
+                    <img 
+                    class={"mb-4 text-center "+styles.logo_commerce} 
+                    src="https://1000marcas.net/wp-content/uploads/2020/10/Movistar-Logo.png" 
+                    alt="" 
+                    />
                     <div>
                         <button class="w-50 btn btn-lg border-bottom fs-6" type="button" 
                             onClick={()=> {
@@ -79,8 +92,21 @@ export default function Home(){
                             ))
                             }
                         </div>
-                        <button class={`w-100 btn btn-lg ${styles.buttonContinue}`} type="button"  onClick={()=> handleSubmit()}>Continuar</button>
-
+                        <button
+                        class={`w-100 btn btn-lg ${styles.buttonContinue}`} 
+                        type="button"  
+                        onClick={()=> handleSubmit()}>
+                        {
+                            !loading?
+                            "Continuar"
+                            :
+                            <div class="spinner-grow text-secondary" role="status">
+            <span class="visually-hidden">Loading...</span>
+            </div>
+                        }
+                        
+                        </button>
+                        
                         </>
                         :
                         <>
@@ -96,5 +122,13 @@ export default function Home(){
             </main>
         </div>
     </div>
+    <div onClick={()=>setModal(false)} className={modal?`${styles.info_modal_active}`:styles.info_modal }>
+        <div>
+        <i class="far fa-times-circle" onClick={()=>setModal(false)}></i>
+            <p>No cuenta con facturas pendientes por pagar.</p>
+            
+        </div>
+    </div>
+    </>
     );
 };

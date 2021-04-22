@@ -14,6 +14,10 @@ $sombra: #80808096;
     flex-flow: column nowrap;
     z-index: 2000;
     .containerForm{
+        .logo_commerce{
+            width: auto;
+            height: 4rem;
+        }
         width: 100%;
         max-width: 450px;
         padding: 15px;
@@ -41,6 +45,46 @@ $sombra: #80808096;
                   }
               }
           }
+        }
+    }
+}
+
+.info_modal{
+    display: none;
+}
+.info_modal_active{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: rgba(45,49,45,.6313725490196078);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    div{
+        background-color: azure;
+        border-radius: 10px;
+        width: 33rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // height: 8rem;
+         justify-content: center;
+        p{
+            color: black;
+            text-align: center;
+            font-size: 1.2rem;
+            padding: .5rem;
+            margin-bottom: 2rem;
+        }
+        i{
+            color:$azul;
+            align-self: flex-end;
+            font-size: 2rem;
+            margin: .5rem .5rem 0 0;
+            &:hover{
+                color: $naranja;
+            }
         }
     }
 }
