@@ -16,7 +16,7 @@ export default function Factura(props) {
     let id = props.match.params.id
 
     useEffect(() => {
-        bill.length == 0 && history.push("/")
+        bill.length === 0 && history.push("/")
     }, [])
 
     let goBackPage = () => {
@@ -28,17 +28,17 @@ export default function Factura(props) {
         bill.length === 1 ?
             <div className={`${styles.container} change `}>
                 <div className={styles.containerTitle}>
-                    <i class="fas fa-arrow-left" onClick={() => goBackPage()}></i>
+                    <i className="fas fa-arrow-left" onClick={() => goBackPage()}></i>
                     <h4>Factura {id}</h4>
                 </div>
                 <div className={styles.downloadContainer}>
                     <h4>Descripcion</h4>
-                    <i class="fas fa-cloud-download-alt"></i>
+                    <i className="fas fa-cloud-download-alt"></i>
                 </div>
                 <div className={styles.contentTable}>
                     {
                         config.length > 0 && config.map((name) => (
-                            name.key == "amountFirst" ?
+                            name.key === "amountFirst" ?
                                 <div key={name.key} className={styles.amount}>
                                     <h5 >{name.name}</h5>
                                     <label>$ {bill[0][name.key]} COP</label>
@@ -52,8 +52,8 @@ export default function Factura(props) {
                     }
                 </div>
                 <div className={styles.containerButtons}  >
-                    <button class="btn">Pagar</button>
-                    <button class="btn">Suscribir</button>
+                    <button className="btn">Pagar</button>
+                    <button className="btn">Suscribir</button>
                 </div>
                 <label>Si tiene alguna duda puede escribir a
                 <a href="mailto:info@epayco.com" target="_blank" rel="noreferrer">

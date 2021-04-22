@@ -23,12 +23,12 @@ function App() {
           </Switch>
           <div className="footer-page">
             <div>
-              <p class="mt-1 mb-3 text-muted" >
-                <img src="https://cdn.dribbble.com/users/4323/screenshots/3387007/secure_sized.gif" style={{ width: "2.5rem" }}></img>
+              <p className="mt-1 mb-3 text-muted" >
+                <img alt="epayco_secure" src="https://cdn.dribbble.com/users/4323/screenshots/3387007/secure_sized.gif" style={{ width: "2.5rem" }}></img>
                 Los pagos son procesados de forma segura por ePayco</p>
             </div>
             <div>
-              <img src="https://multimedia.epayco.co/dashboard/recaudo/proyecto/imagenes/logoepayco.png" style={{ height: "2rem", width: "auto", margin: "0.7rem" }} />
+              <img alt="epayco_logo" src="https://multimedia.epayco.co/dashboard/recaudo/proyecto/imagenes/logoepayco.png" style={{ height: "2rem", width: "auto", margin: "0.7rem" }} />
             </div>
           </div>
         </section>
