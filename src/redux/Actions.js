@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TOKEN, PROJECTCONFIG, ALLBILLS, CLEARALLBILLS, ONEBILL, CLEARBILL} from './Constants';
+import { TOKEN, PROJECTCONFIG, ALLBILLS, CLEARALLBILLS, ONEBILL, CLEARBILL, LOADING_TRUE, LOADING_FALSE} from './Constants';
 
 export const getToken = () => async (dispatch) => {
     try {
@@ -9,7 +9,9 @@ export const getToken = () => async (dispatch) => {
           password: process.env.REACT_APP_PASSWORD
         }  
       })
-
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${res.data.token}`;
 
       dispatch({
         type: TOKEN,
@@ -22,18 +24,11 @@ export const getToken = () => async (dispatch) => {
 }
 
 
-export const projectConfig = () => async (dispatch, getState) => {
+export const projectConfig = () => async (dispatch) => {
     try {
-        let token = await getState().red.token;
         let res= await axios.post("https://apify.epayco.co//billcollect/proyect/config/consult",
         { projectId: process.env.REACT_APP_PROJECTID },
-        { 
-            headers: {
-                'Authorization': `Bearer ${token.token}`,
-                'Accept' : 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
+        )
       dispatch({
         type: PROJECTCONFIG,
         payload: res.data.data
@@ -46,28 +41,23 @@ export const projectConfig = () => async (dispatch, getState) => {
 
 
 
-export const allBills= (input) => async (dispatch, getState) => {
+export const allBills= (input) => async (dispatch) => {
+
     try {
-        let token =  getState().red.token;
+        dispatch(loadingTrue())
         let res= await axios.post("https://apify.epayco.co/billcollect/invoices/consult",
             {
                 projectId: process.env.REACT_APP_PROJECTID,
                 document: input
-            },
-            { 
-                headers: {
-                'Authorization': `Bearer ${token.token}`,
-                'Accept' : 'application/json',
-                'Content-Type': 'application/json'
-            }
-            })
+            }           
+            )
                         
         if(res.data.data.bills.length === 1) dispatch(oneBill(res.data.data.bills))
          else dispatch({
             type: ALLBILLS,
             payload: res.data.data.bills
         });
-
+        dispatch(loadingFalse())
         } catch (error) {
                 console.log("error en getBills", error)
             }
@@ -108,5 +98,28 @@ export const clearBill= () => async (dispatch) => {
 
         } catch (error) {
                 console.log("error en CLEARBILL", error)
+            }
+}
+
+export const loadingTrue= () => async (dispatch) => {
+    try {
+        dispatch({
+            type: LOADING_TRUE,
+            payload: []
+        });
+
+        } catch (error) {
+                console.log("error en LOADING_TRUE", error)
+            }
+}
+export const loadingFalse= () => async (dispatch) => {
+    try {
+        dispatch({
+            type: LOADING_FALSE,
+            payload: []
+        });
+
+        } catch (error) {
+                console.log("error en LOADING_FALSE", error)
             }
 }
