@@ -4,30 +4,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearBills, oneBill } from '../../redux/Actions';
 import { useEffect } from 'react';
 
-export default function Facturas(){
+export default function Facturas() {
 
-    const history= useHistory()
-    const dispatch= useDispatch()
+    const history = useHistory()
+    const dispatch = useDispatch()
     const bills = useSelector((store) => store.red.bills);
 
-    let goBackPage= ()=>{
+    let goBackPage = () => {
         dispatch(clearBills())
         history.push("/")
     }
 
-    useEffect(()=>{
-        bills.length<1 && history.push("/")
-    },[])
+    useEffect(() => {
+        bills.length < 1 && history.push("/")
+    }, [])
 
-    let onChangeClick = (factura, doc)=>{
+    let onChangeClick = (factura, doc) => {
         dispatch(oneBill(factura))
-        history.push("/factura/"+doc)
+        history.push("/factura/" + doc)
     }
 
-    return(
+    return (
         <div className={`${styles.container} change `}>
             <div className={styles.containerTitle}>
-                <i class="fas fa-arrow-left" onClick={()=> goBackPage()}></i>
+                <i class="fas fa-arrow-left" onClick={() => goBackPage()}></i>
                 <h4>Lista de Facturas</h4>
             </div>
             <table class="table table-hover">
@@ -40,17 +40,17 @@ export default function Facturas(){
                     </tr>
                 </thead>
                 <tbody>
-                    {bills.length>0 && bills.map((factura, index)=>(
-                        <tr key={index+1} >
+                    {bills.length > 0 && bills.map((factura, index) => (
+                        <tr key={index + 1} >
                             <td>$ {factura.amountFirst} COP</td>
                             <td>{factura.document}</td>
-                            <td>{factura.billDate.slice(0,10)}</td>
+                            <td>{factura.billDate.slice(0, 10)}</td>
                             <td>
                                 <button
-                                class={"btn btn-lg btn-outline-info "+styles.buttonFile} 
-                                onClick={()=> onChangeClick([factura], factura.document)}>
+                                    class={"btn btn-lg btn-outline-info " + styles.buttonFile}
+                                    onClick={() => onChangeClick([factura], factura.document)}>
                                     <div>Detalle</div>
-                                    <i class="fas fa-file-invoice-dollar"></i>          
+                                    <i class="fas fa-file-invoice-dollar"></i>
                                 </button>
                             </td>
                         </tr>
