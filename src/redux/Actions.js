@@ -9,7 +9,9 @@ export const getToken = () => async (dispatch) => {
           password: process.env.REACT_APP_PASSWORD
         }  
       })
-
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${res.data.token}`;
 
       dispatch({
         type: TOKEN,
@@ -22,18 +24,11 @@ export const getToken = () => async (dispatch) => {
 }
 
 
-export const projectConfig = () => async (dispatch, getState) => {
+export const projectConfig = () => async (dispatch) => {
     try {
-        let token = await getState().red.token;
         let res= await axios.post("https://apify.epayco.co//billcollect/proyect/config/consult",
         { projectId: process.env.REACT_APP_PROJECTID },
-        { 
-            headers: {
-                'Authorization': `Bearer ${token.token}`,
-                'Accept' : 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
+        )
       dispatch({
         type: PROJECTCONFIG,
         payload: res.data.data
@@ -46,23 +41,16 @@ export const projectConfig = () => async (dispatch, getState) => {
 
 
 
-export const allBills= (input) => async (dispatch, getState) => {
+export const allBills= (input) => async (dispatch) => {
 
     try {
         dispatch(loadingTrue())
-        let token =  getState().red.token;
         let res= await axios.post("https://apify.epayco.co/billcollect/invoices/consult",
             {
                 projectId: process.env.REACT_APP_PROJECTID,
                 document: input
-            },
-            { 
-                headers: {
-                'Authorization': `Bearer ${token.token}`,
-                'Accept' : 'application/json',
-                'Content-Type': 'application/json'
-            }
-            })
+            }           
+            )
                         
         if(res.data.data.bills.length === 1) dispatch(oneBill(res.data.data.bills))
          else dispatch({
