@@ -1,18 +1,28 @@
+@import "../../styles/bp.scss";
+
+$azul: #1c0e49;
+$naranja: #ff6700;
+$naranja-int: #ff8349;
+$naranja-claro: #f99500;
+$sombra: #80808096;
+
 .container{
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    box-shadow: 3px 3px 7px 1px #80808096;
-    margin: 10%;
-    margin-top: 20%;
+    min-width: 320px;
+    max-width: 800px;
+    box-shadow: 3px 3px 7px 1px $sombra;
+    margin: 10% auto;
     background-color: white;
+    border-radius: 1.5rem 0 0 0;
 
     .containerTitle{
         display: grid;
-        grid-template-columns: 10% 90%;
-        background-color: red;
-        border-radius: 2% 0;
-        border-radius: 2% 2% 0 0;
+        grid-template-columns: 3rem auto;
+        background-color: $naranja;
+        border-radius: 1.3rem 0 4rem 0;
+        padding: 0;
         i{
             font-size: 1.5rem;
             align-self: center;
@@ -24,7 +34,6 @@
         h4{
             align-self: center;
             text-align-last: center;
-            padding: 2%;
             color: white;
         }
     }
@@ -32,6 +41,9 @@
         thead{
             tr{
                 text-align-last: center;
+                @include respond-to("default"){
+                    text-align: center;
+                }
             }
         }
         tbody{
@@ -40,9 +52,46 @@
                 td{
                     border: none;
                     vertical-align: middle;
+                    button{
+                        &.buttonFile{
+                            i{
+                                display: none;
+                            }
+                            @include respond-to("default"){
+                                div{
+                                    display: none;
+                                }
+                                i{
+                                    display: block;
+                                    font-size: 1.7rem;
+                                }
+                            }
+                        }
+                        color: $azul;
+                        border-color: $azul;
+                        &:hover{
+                            color: #fff;
+                            background-color: $azul;
+                            border-color: $azul;
+                        }
+                        &:focus{
+                            box-shadow: 0 0 0 0.25rem $azul;
+                        }
+                        &:active{
+                            color: #fff;
+                            background-color: $azul;
+                            border-color: $azul;
+                        }
+                    }
                 }
             }
         }
     }
 }
     
+@include respond-to("default"){
+    .container{
+        margin: 5%;
+        margin-top: 20vh;
+    }
+}

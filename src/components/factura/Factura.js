@@ -1,29 +1,23 @@
 import styles from './factura.module.scss'
 import { useHistory } from "react-router-dom";
 import { useEffect} from 'react';
-import { clearBill, projectConfig } from '../../redux/Actions';
+import { clearBill } from '../../redux/Actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function Factura(props){
 
-    const history= useHistory()
-    const dispatch =useDispatch()
+    const history = useHistory()
+    const dispatch = useDispatch()
 
     const config = useSelector((store) => store.red.projectConfig);
-    const bills = useSelector((store) => store.red.bills);
     const bill = useSelector((store) => store.red.bill);
-
 
     let id= props.match.params.id
 
     useEffect(()=>{
-        dispatch( projectConfig())
+        bill.length==0 && history.push("/")
     },[])
-
-    // useEffect(()=>{
-    //     bill.length!==1 && history.push("/")
-    // },[])
 
     let goBackPage= ()=>{
         dispatch(clearBill())
@@ -31,36 +25,45 @@ export default function Factura(props){
     }
 
     return(
-        console.log("facrua", bill),
         bill.length === 1?
-        <div className={styles.container}>
+        <div className={`${styles.container} change `}>
              <div className={styles.containerTitle}>
                 <i class="fas fa-arrow-left" onClick={()=> goBackPage()}></i>
                 <h4>Factura {id}</h4>
             </div>
-
-            <h4>Descripcion</h4>
+            <div className={styles.downloadContainer}>
+                <h4>Descripcion</h4>
+                <i class="fas fa-cloud-download-alt"></i>
+            </div>
             <div className={styles.contentTable}>   
             {
                 config.length>0 && config.map((name)=>(
-                <div key={name.key}> 
-                    <h5>{name.name}</h5> 
-                    <h5 className={styles.info}>{bill[0][name.key]? bill[0][name.key] :"------"}</h5>
-                </div>
-             ))
+                name.key== "amountFirst"?
+                    <div key={name.key} className={styles.amount}> 
+                        <h5 >{name.name}</h5> 
+                        <label>$ {bill[0][name.key]} COP</label>
+                    </div>     
+                  :
+                    <div key={name.key} className={styles.rows}> 
+                        <h5>{name.name}</h5> 
+                        <label className={styles.info}>{bill[0][name.key]? bill[0][name.key] :"------"}</label>
+                    </div>
+            ))
             }
-
-             </div>
-            <div class="m-3">
-                <button class="btn btn-outline-primary btn-lg"> <i class="fas fa-cloud-download-alt"></i> Descargar</button>
             </div>
-
             <div className={styles.containerButtons}  >
-                <button class="btn">Pagar Factura</button>
-                <button class="btn">Suscribir Factura</button>
+                <button class="btn">Pagar</button>
+                <button class="btn">Suscribir</button>
             </div>
-
-            <label>Si tiene alguna duda puede escribir a felipemesa14@gmail.com, o llamar al (57) 3024133765</label>
+            <label>Si tiene alguna duda puede escribir a 
+                <a href="mailto:info@epayco.com" target="_blank" rel="noreferrer">
+                    info@epayco.com
+                </a>
+                , o llamar al 
+                <a href="tel: +573024133765">
+                (57) 3024133765
+                </a>
+            </label>
         </div>
         :
         <div>error</div>

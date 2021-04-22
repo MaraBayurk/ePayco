@@ -61,9 +61,7 @@ export const allBills= (input) => async (dispatch, getState) => {
                 'Content-Type': 'application/json'
             }
             })
-                
-            console.log("aqui, son las bills",res.data.data.bills)
-        
+                        
         if(res.data.data.bills.length === 1) dispatch(oneBill(res.data.data.bills))
          else dispatch({
             type: ALLBILLS,
@@ -78,7 +76,6 @@ export const allBills= (input) => async (dispatch, getState) => {
 
 export const oneBill= (bill) => async (dispatch, getState) => {
     try {
-        console.log("action::::: bill")
         dispatch({
             type: ONEBILL,
             payload: bill

@@ -1,67 +1,118 @@
+@import "../../styles/bp.scss";
+
+$azul: #1c0e49;
+$naranja: #ff6700;
+$naranja-int: #ff8349;
+$naranja-claro: #f99500;
+$sombra: #80808096;
+
 .container{
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
-    box-shadow: 3px 3px 7px 1px #80808096;
-    margin: 5% 20%;
+    border-radius: 10px;
+    box-shadow: 3px 3px 7px 1px $sombra;
+    margin: 4rem auto 2rem;
     background-color: white;
+    max-width: 500px;
     .containerTitle{
         display: grid;
-        grid-template-columns: 5% 95%;
-        background-color: red;
-        border-radius: 2% 0;
-        border-radius: 2% 2% 0 0;
+        grid-template-columns: 3rem auto;
+        background-color: $azul;
+        border-radius: 1.3rem 0.3rem 4rem 0;
         i{
             font-size: 1.5rem;
             align-self: center;
             text-align: center;
+            color: white;
             &:hover{
-                color:white
+                color:$naranja
             }
         }
         h4{
             align-self: center;
             text-align-last: center;
-            padding: 2%;
             color: white;
         }
     }
-    h4{
-        margin: 2%;
-        font-size: 1.3rem;
+    .downloadContainer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+       
+        h4{
+            margin: 2%;
+            font-size: 1.3rem;
+        }
+        i{
+            margin: 0.7rem;
+            font-size: 1.3rem;
+            &:hover{
+                color:$naranja;
+            }
+        }
     }
     .contentTable{
-  
         margin: 2%;
-        div{
+        .rows{
             display: grid;
             grid-template-columns: 50% 50%;
-            border-bottom-style: ridge;           
+            border-bottom-style: ridge;    
+            border-bottom: 2px gray;       
             border-color: #ffffff;
             h5{
-                font-size: 1.1rem;
-                margin: 0.3rem;
-
+                font-size: 0.9rem;
+                margin: .2rem;
+                align-self: center;
             }
             .info{
                 text-align: right;
                 color:#9da8bb;
+                margin: .2rem;
+                line-height: 1;
             }
+        }
+        .amount{
+            font-size: 2rem;
+            display: flex ;
+            justify-content: center;
+            align-items: flex-end;
+            margin: 1rem 5rem;
+            border-bottom: 1px solid #cccccc;
 
+            h5{
+                font-size: 1.2rem;
+                line-height: 1;
+                font-weight: 400;
+                margin: .2rem;
+                margin-right: 1rem;
+            }
+            label{
+                font-size: 2rem;
+                margin: .2rem;
+                line-height: 1;
+                color:#838b9a
+            }
+            @include respond-to("default"){
+                margin: .5rem;
+                h5{
+                    margin: .5rem;
+                }
+                label{
+                }
+            }
         }
     }
     .containerButtons{
         display: flex;
         justify-content: space-evenly;
-        border-top: 1px solid rgb(99, 99, 99);
-        padding: 2rem;
+        padding: 1rem;
         button{
-            width: 18rem;
             color: white;
-            background-color: #40a8e6;
+            background-color: $naranja;
             font-size: 1.3rem;
+            border-radius: 61% 0 59% 0;
             &:hover{
-                box-shadow: 3px 3px 7px 1px #80808096;
+                box-shadow: 3px 3px 7px 1px $sombra;
             }
         }
     }
@@ -69,5 +120,9 @@
         margin: 0.5rem;
         align-self: center;
         color:#9da8bb;
+        font-size: 0.7rem;
+        a{
+            margin-left: .3rem;
+        }
     }
 }

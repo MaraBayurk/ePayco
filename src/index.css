@@ -5,13 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f53f23;
+  background-color: #1c0e49;
   background-image:url(https://multimedia-epayco.s3.amazonaws.com/dashboard/recaudo/proyecto/imagenes/plantilla_1.png) ;
     background-position: center bottom;
     background-size: cover;
     background-repeat: no-repeat;
     flex-flow: column nowrap;
-
+  height: 100vh; 
 }
 
 code {
